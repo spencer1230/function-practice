@@ -37,12 +37,23 @@
           ]
         });
 				function reverseText(text) {
-					
+					// return null if empty
+					if (text === null){
+						return null;
+				  }
+					// make empty string
+					var reversed = '';
+					// loop backwards over text
+					for (var index = text.length - 1; index >=0; index--) {
+						// append character to new text
+						reversed += text[index];
+					}
+					return reversed;
 				}
         createExample('Reverse Text', {
           description: 'Create a function that reverses the characters in \
             a string',
-          implementation: null,
+          implementation: reverseText,
           validation: [
             {
               input: 'test value',
