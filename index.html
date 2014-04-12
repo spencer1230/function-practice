@@ -69,13 +69,35 @@
             }
           ]
         });
+				
+				function tenderChange(amount) {
+          
+          var change = {
+            fives: 0,
+            ones: 0,
+            dimes: 0,
+            pennies: 0,
+          };
 
-        createExample('Tender Change', {
+          var bills = 0
+          var coins = 0
+
+          if (amount>=0) {
+            change.fives = Math.floor(amount / 5);
+            bills = amount - (change.fives * 5);
+            change.ones = Math.floor(bills);
+            coins = Math.floor(bills % 1 * 100);
+            change.dimes = Math.floor(coins / 10);
+            change.pennies = coins % 10;
+          }
+          return change
+        };
+				 createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
             <code>7.23</code> it should return: \
             <pre>{ fives: 1, ones: 2, dimes: 2, pennies: 3 }</pre>',
-          implementation: null,
+          implementation: tenderChange,
           validation: [
             {
               input: 7.23,
@@ -83,12 +105,32 @@
             }
           ]
         });
-
-        createExample('The Pluralizer', {
+				
+				//var denomination = [ 
+					//{ name: "Five", valueOf: 500}
+					//{ name: "One", valueOf: 100}
+					//{ name: "Quarter", valueOf: 25}
+				//	{ name: "Dime", valueOf: 10}
+				//	{ name: "Nickel", valueOf: 5}
+				//	{ name: "Penny", valueOf: 1}
+			    
+				function pluralize(noun, number) {
+    	if (number != 1 && noun != 'Squirrel' && noun != 'Mongoose') {
+        return number + ' ' + noun + 's';
+    	} else {
+        return number + ' ' + noun;
+    	}
+				}
+				//console.log('I have ' + pluralize('Wolverine', 0));
+				//console.log('I have ' + pluralize('Wolverine', 1));
+				//console.log('I have ' + pluralize('Wolverine', 2));
+				//output: pluralize
+				
+				createExample('The Pluralizer', {
           description: 'Write a function that takes two arguments, a noun \
             and a number, and returns the number and the noun in pluralized \
             form (for instance, "1 dog", "5 cats")',
-          implementation: null,
+          implementation: pluralize,
           validation: [
             {
               input: ['dog', 1],
@@ -113,7 +155,15 @@
           'Fight Club,1999,791186',
           'Star Wars: Episode V - The Empire Strikes Back,1980,503348'
         ];
-
+				function sortList (movieList) {
+				 for (index = 0; index < movieList.length; index++){
+				 //console.log (movieList[index]);
+					 var movies 
+					 var year
+					 var votes
+					 
+				 } 
+				};
         createExample('Movie Parsing', {
           description: "Given the following comma separated list of IMDb top \
             rated movies: <pre>var movieList = " +
@@ -121,7 +171,15 @@
             "</pre> create a function that splits the values into the title, \
             year, and number of votes and returns a list of movie objects \
             sorted by year.",
-          implementation: null
+          implementation: movieList,
+          validation: [
+            {
+              input: [ movieList ],
+              output: [
+                // enter sorted, formatted list here...
+              ]
+            }
+          ]
         });
       });
     </script>
