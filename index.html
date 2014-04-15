@@ -70,28 +70,30 @@
           ]
         });
 				
-				function tenderChange(amount) {
-          
-          var change = {
-            fives: 0,
-            ones: 0,
-            dimes: 0,
-            pennies: 0,
-          };
-
-          var bills = 0
-          var coins = 0
-
-          if (amount>=0) {
-            change.fives = Math.floor(amount / 5);
-            bills = amount - (change.fives * 5);
-            change.ones = Math.floor(bills);
-            coins = Math.floor(bills % 1 * 100);
-            change.dimes = Math.floor(coins / 10);
-            change.pennies = coins % 10;
-          }
-          return change
-        };
+	var denominations = {
+  twenties: 2000,
+  tens: 1000,
+  fives: 500,
+  ones: 100,
+  quarters: 25,
+  dimes: 10,
+  nickels: 5,
+  pennies: 1
+};
+function tenderChange(amount) {
+  // convert to work in pennies
+  amount = Math.floor(amount * 100);
+  var change = {};
+  // loop through the available denominations
+  for(var key in denominations) {
+    var value = denominations[key];
+    if (amount >= value){
+      change[key] = Math.floor(amount / value);
+      amount -= value * change[key];
+    }
+  }
+  return change;
+}
 				 createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
@@ -158,12 +160,16 @@
 				function sortList (movieList) {
 				 for (index = 0; index < movieList.length; index++){
 				 //console.log (movieList[index]);
-					 var movies; 
-					 var year;
-					 var votes;
-					 var sort = ['movies', 'year', 'votes'];
-					 alert(sort[0]);
-				 } 
+					 //var movies = [" "];
+					 //movies.sort(); 
+					 //var year = [" "];
+					 //year.sort();
+					 //var votes = [" "];
+					 //votes.sort;
+					 movieList.sort(1);
+					 return 1;
+					 
+					 } 
 				};
         createExample('Movie Parsing', {
           description: "Given the following comma separated list of IMDb top \
