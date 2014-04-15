@@ -71,29 +71,32 @@
         });
 				
 	var denominations = {
-  twenties: 2000,
-  tens: 1000,
-  fives: 500,
-  ones: 100,
-  quarters: 25,
-  dimes: 10,
-  nickels: 5,
-  pennies: 1
-};
-function tenderChange(amount) {
-  // convert to work in pennies
-  amount = Math.floor(amount * 100);
-  var change = {};
-  // loop through the available denominations
-  for(var key in denominations) {
-    var value = denominations[key];
-    if (amount >= value){
-      change[key] = Math.floor(amount / value);
-      amount -= value * change[key];
-    }
-  }
-  return change;
-}
+          fifties: 5000,
+          twenties: 2000,
+          tens: 1000,
+          fives: 500,
+          ones: 100,
+          quarters: 25,
+          dimes: 10,
+          nickels: 5,
+          pennies: 1
+		};
+        function tenderChange(amount) {
+          var change = {};
+          // multiple amount by 100 to work in same unit
+          amount *= 100;
+          // loop through denominations largest to smallest
+          for(var key in denominations) {
+            // if remainder greater than denomination
+            if(amount >= denominations[key]) {
+              // then calculate change
+              change[key] = Math.floor(amount / denominations[key]);
+              // reduce remainder by correct amount
+              amount -= change[key] * denominations[key];
+            }
+		  }
+          return change;
+        };
 				 createExample('Tender Change', {
           description: 'Write a function that given a dollar amount returns \
             the change in bills and coins. For instance, given \
